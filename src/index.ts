@@ -1,16 +1,15 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
+import mongoose from 'mongoose'
 
-  const app = express()
-  const port = process.env.PORT || 8080
+import routes from './routes'
 
-  app.get('/', (_req: Request, res: Response) => {
-    return res.send('Express Typescript on Vercel')
-  })
+mongoose.connect(process.env.DATABASE_URI || 'mongodb+srv://root:Joaovitor123@databse-joao.voiwao9.mongodb.net/?retryWrites=true&w=majority')
 
-  app.get('/ping', (_req: Request, res: Response) => {
-    return res.send('pong 🏓')
-  })
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
 
-  app.listen(port, () => {
-    return console.log(`Server is listening on ${port}`)
-  })
+const port = process.env.PORT || 3003;
+
+app.use(routes);
+app.listen(port, () => {console.log(`Funcionando na porta ${port}`)})
