@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import cors from 'cors'
 
 import routes from './routes'
 
@@ -8,6 +9,7 @@ mongoose.connect(process.env.DATABASE_URI || 'mongodb+srv://root:Joaovitor123@da
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cors());
 
 const port = process.env.PORT || 3003;
 
