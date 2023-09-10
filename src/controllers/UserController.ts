@@ -4,6 +4,7 @@ import User from '../schemas/User';
 class UserController{
 
     async create(req: Request, res: Response){
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         const { name, email, password } = req.body;
 
         const isEmailUnique = async () => {
@@ -42,6 +43,7 @@ class UserController{
     }
 
     async readAll(req: Request, res: Response){
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         try{
             res.json(await User.find());
         }catch(e){
@@ -53,6 +55,7 @@ class UserController{
     }
 
     async login(req: Request, res: Response){
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         const { email, password } = req.body;
 
         const userExists = async () => {
@@ -106,6 +109,7 @@ class UserController{
     }
 
     async update(req: Request, res: Response){
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         const { email, password, updateName, updateEmail, updatePass } = req.body;
 
         const userExists = async () => {
@@ -178,6 +182,7 @@ class UserController{
     }
 
     async delete(req: Request, res: Response){
+        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         const { email, password, deleteMessage } = req.body;
 
         const userExists = async () => {

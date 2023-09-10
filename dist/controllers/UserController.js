@@ -16,6 +16,7 @@ const User_1 = __importDefault(require("../schemas/User"));
 class UserController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             const { name, email, password } = req.body;
             const isEmailUnique = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
@@ -54,6 +55,7 @@ class UserController {
     }
     readAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             try {
                 res.json(yield User_1.default.find());
             }
@@ -67,6 +69,7 @@ class UserController {
     }
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             const { email, password } = req.body;
             const userExists = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
@@ -121,6 +124,7 @@ class UserController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             const { email, password, updateName, updateEmail, updatePass } = req.body;
             const userExists = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
@@ -195,6 +199,7 @@ class UserController {
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             const { email, password, deleteMessage } = req.body;
             const userExists = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
