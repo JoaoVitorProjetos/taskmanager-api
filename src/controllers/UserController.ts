@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import User from '../schemas/User';
+import Task from "../schemas/Task";
 
 class UserController{
 
     async create(req: Request, res: Response){
-        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         const { name, email, password } = req.body;
 
         const isEmailUnique = async () => {
@@ -42,20 +42,20 @@ class UserController{
         }
     }
 
-    async readAll(req: Request, res: Response){
-        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+    async find(req: Request, res: Response){
+        const { email } = req.body
+
         try{
-            res.json(await User.find());
+            res.json(await User.find({email: email}));
         }catch(e){
             return res.status(500).send({
-                error: "reading failed",
+                error: "find failed",
                 message: e,
             });
         }
     }
 
     async login(req: Request, res: Response){
-        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         const { email, password } = req.body;
 
         const userExists = async () => {
@@ -109,7 +109,6 @@ class UserController{
     }
 
     async update(req: Request, res: Response){
-        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         const { email, password, updateName, updateEmail, updatePass } = req.body;
 
         const userExists = async () => {
@@ -182,7 +181,6 @@ class UserController{
     }
 
     async delete(req: Request, res: Response){
-        res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
         const { email, password, deleteMessage } = req.body;
 
         const userExists = async () => {
@@ -219,6 +217,7 @@ class UserController{
                             authenticationDeleteMessage().then(async (boolean) => {
                                 if(boolean){
                                     await User.deleteOne({email: email})
+                                    await Task.deleteMany({emailUser: email})
 
                                     res.json({
                                         message: 'User deleted'

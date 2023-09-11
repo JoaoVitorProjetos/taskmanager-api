@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const User_1 = __importDefault(require("../schemas/User"));
+const Task_1 = __importDefault(require("../schemas/Task"));
 class UserController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             const { name, email, password } = req.body;
             const isEmailUnique = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
@@ -53,15 +53,15 @@ class UserController {
             }
         });
     }
-    readAll(req, res) {
+    find(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+            const { email } = req.body;
             try {
-                res.json(yield User_1.default.find());
+                res.json(yield User_1.default.find({ email: email }));
             }
             catch (e) {
                 return res.status(500).send({
-                    error: "reading failed",
+                    error: "find failed",
                     message: e,
                 });
             }
@@ -69,7 +69,6 @@ class UserController {
     }
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             const { email, password } = req.body;
             const userExists = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
@@ -124,7 +123,6 @@ class UserController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             const { email, password, updateName, updateEmail, updatePass } = req.body;
             const userExists = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
@@ -199,7 +197,6 @@ class UserController {
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
             const { email, password, deleteMessage } = req.body;
             const userExists = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
@@ -235,6 +232,7 @@ class UserController {
                                 authenticationDeleteMessage().then((boolean) => __awaiter(this, void 0, void 0, function* () {
                                     if (boolean) {
                                         yield User_1.default.deleteOne({ email: email });
+                                        yield Task_1.default.deleteMany({ emailUser: email });
                                         res.json({
                                             message: 'User deleted'
                                         });
