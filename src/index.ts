@@ -4,7 +4,7 @@ import cors from 'cors'
 
 import routes from './routes'
 
-mongoose.connect(process.env.DATABASE_URI)
+mongoose.connect(process.env.DATABASE_URI || 'mongodb+srv://root:Joaovitor123@databse-joao.voiwao9.mongodb.net/?retryWrites=true&w=majority')
 
 const app = express();
 app.use(express.json());
