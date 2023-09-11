@@ -35,7 +35,9 @@ class UserController {
                             email,
                             password,
                         });
-                        return res.json(yield User_1.default.find());
+                        return res.json({
+                            message: 'registration alowed'
+                        });
                     }
                     else {
                         return res.json({

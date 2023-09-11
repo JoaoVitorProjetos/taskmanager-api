@@ -26,7 +26,9 @@ class UserController{
                         password,
                     });
 
-                    return res.json(await User.find());
+                    return res.json({
+                        message: 'registration alowed'
+                    });
                 }else{
                     return res.json({
                         error: "registation failed",
