@@ -4,14 +4,14 @@ import cors from 'cors'
 
 import routes from './routes'
 
-mongoose.connect(process.env.DATABASE_URI || 'mongodb+srv://root:Joaovitor123@databse-joao.voiwao9.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.DATABASE_URI)
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
-const port = process.env.PORT || 3003;
+const port = process.env.PORT;
 
 app.use(routes);
 app.listen(port, () => {console.log(`Funcionando na porta ${port}`)})
