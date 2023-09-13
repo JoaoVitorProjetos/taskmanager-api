@@ -20,7 +20,7 @@ class UserController {
             const { name, email, password } = req.body;
             const isEmailUnique = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
-                if ((yield array.length) === 0) {
+                if (array.length === 0) {
                     return true;
                 }
                 else {
@@ -29,7 +29,7 @@ class UserController {
             });
             try {
                 isEmailUnique().then((result) => __awaiter(this, void 0, void 0, function* () {
-                    if (result) {
+                    if (result && email !== '' && password !== '') {
                         const user = yield User_1.default.create({
                             name,
                             email,
@@ -41,7 +41,7 @@ class UserController {
                     }
                     else {
                         return res.json({
-                            error: "registation failed",
+                            error: "registration failed",
                             message: "this email is already in use"
                         });
                     }
@@ -49,7 +49,7 @@ class UserController {
             }
             catch (e) {
                 return res.status(500).send({
-                    error: "registation failed",
+                    error: "registration failed",
                     message: e,
                 });
             }

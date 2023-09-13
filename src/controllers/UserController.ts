@@ -10,7 +10,7 @@ class UserController{
         const isEmailUnique = async () => {
             const array = await User.find({ email: email })
 
-            if(await array.length === 0){
+            if(array.length === 0){
                 return true
             }else{
                 return false
@@ -19,7 +19,7 @@ class UserController{
 
         try {
             isEmailUnique().then(async (result) => {
-                if(result){
+                if(result && email !== '' && password !== ''){
                     const user = await User.create({
                         name,
                         email,
@@ -31,14 +31,14 @@ class UserController{
                     });
                 }else{
                     return res.json({
-                        error: "registation failed",
+                        error: "registration failed",
                         message: "this email is already in use"
                     });
                 }
             })
         }catch (e) {
             return res.status(500).send({
-                error: "registation failed",
+                error: "registration failed",
                 message: e,
             });
         }

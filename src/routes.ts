@@ -6,7 +6,7 @@ const routes = Router();
 
 //ROUTES USER
 
-routes.post('/createUser', UserController.create);
+routes.post('/signin', UserController.create);
 routes.post('/findUser', UserController.find);
 routes.post('/login', UserController.login);
 routes.post('/updateUser', UserController.update);

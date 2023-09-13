@@ -71,7 +71,7 @@ class TaskController{
                 return true
             }else{
                 return false
-            }
+            } 
         }
 
         try{
