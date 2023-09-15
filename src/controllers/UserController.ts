@@ -132,7 +132,7 @@ class UserController{
             }
         }
         const isEmailUnique = async () => {
-            const array = await User.find({ _id: { $not: { $eq: `ObjectId('${id}')` }}, email: updateEmail })
+            const array = await User.find({ _id: { $not: { $eq: `ObjectId(${id})` }}, email: updateEmail })
 
             if(array.length === 0){
                 return true
