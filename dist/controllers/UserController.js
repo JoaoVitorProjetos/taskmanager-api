@@ -145,7 +145,7 @@ class UserController {
                 }
             });
             const isEmailUnique = () => __awaiter(this, void 0, void 0, function* () {
-                const array = yield User_1.default.find({ _id: { $not: { $eq: id } }, email: updateEmail });
+                const array = yield User_1.default.find({ email: updateEmail });
                 if (array.length === 0) {
                     return true;
                 }
@@ -159,7 +159,7 @@ class UserController {
                         authenticationPassword().then((boolean) => __awaiter(this, void 0, void 0, function* () {
                             if (boolean) {
                                 isEmailUnique().then((boolean) => __awaiter(this, void 0, void 0, function* () {
-                                    if (boolean) {
+                                    if (boolean || updateEmail == email) {
                                         yield User_1.default.updateOne({ email: email }, {
                                             $set: { name: updateName, email: updateEmail, password: updatePass }
                                         });

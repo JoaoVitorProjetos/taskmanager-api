@@ -132,7 +132,7 @@ class UserController{
             }
         }
         const isEmailUnique = async () => {
-            const array = await User.find({ _id: { $not: { $eq: id }}, email: updateEmail })
+            const array = await User.find({ email: updateEmail })
 
             if(array.length === 0){
                 return true
@@ -147,7 +147,7 @@ class UserController{
                     authenticationPassword().then(async (boolean) => {
                         if(boolean){
                             isEmailUnique().then(async (boolean) => {
-                                if(boolean){
+                                if(boolean || updateEmail == email){
                                     await User.updateOne({email: email}, {
                                         $set: {name: updateName, email: updateEmail, password: updatePass}
                                     })
