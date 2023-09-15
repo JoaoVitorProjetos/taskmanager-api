@@ -145,7 +145,7 @@ class UserController {
                 }
             });
             const isEmailUnique = () => __awaiter(this, void 0, void 0, function* () {
-                const array = yield User_1.default.find({ _id: { $not: { $eq: id } }, email: updateEmail });
+                const array = yield User_1.default.find({ _id: { $not: { $eq: `ObjectId(${id})` } }, email: updateEmail });
                 if (array.length === 0) {
                     return true;
                 }
