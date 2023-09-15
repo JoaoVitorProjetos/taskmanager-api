@@ -111,7 +111,7 @@ class UserController{
     }
 
     async update(req: Request, res: Response){
-        const { email, password, updateName, updateEmail, updatePass } = req.body;
+        const { id,email, password, updateName, updateEmail, updatePass } = req.body;
 
         const userExists = async () => {
             const array = await User.find({ email: email })
@@ -132,9 +132,9 @@ class UserController{
             }
         }
         const isEmailUnique = async () => {
-            const array = await User.find({ email: updateEmail })
+            const array = await User.find({ _id: { $not: { $eq: id }}, email: updateEmail })
 
-            if(await array.length === 0){
+            if(array.length === 0){
                 return true
             }else{
                 return false

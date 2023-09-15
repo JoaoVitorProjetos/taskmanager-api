@@ -125,7 +125,7 @@ class UserController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { email, password, updateName, updateEmail, updatePass } = req.body;
+            const { id, email, password, updateName, updateEmail, updatePass } = req.body;
             const userExists = () => __awaiter(this, void 0, void 0, function* () {
                 const array = yield User_1.default.find({ email: email });
                 if (array.length != 0) {
@@ -145,8 +145,8 @@ class UserController {
                 }
             });
             const isEmailUnique = () => __awaiter(this, void 0, void 0, function* () {
-                const array = yield User_1.default.find({ email: updateEmail });
-                if ((yield array.length) === 0) {
+                const array = yield User_1.default.find({ _id: { $not: { $eq: id } }, email: updateEmail });
+                if (array.length === 0) {
                     return true;
                 }
                 else {
