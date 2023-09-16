@@ -13,7 +13,7 @@ const options: cors.CorsOptions = {
     ],
     credentials: true,
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: 'https://taskmanagerjoao.vercel.app/',
+    origin: 'https://taskmanagerjoao.vercel.app',
     preflightContinue: false,
   };
 
