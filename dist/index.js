@@ -17,7 +17,7 @@ const options = {
     ],
     credentials: true,
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: 'https://taskmanagerjoao.vercel.app',
+    origin: 'http://localhost:3003',
     preflightContinue: false,
 };
 const routes_1 = __importDefault(require("./routes"));
