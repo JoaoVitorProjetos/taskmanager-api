@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors';
+require('dotenv').config();
 
 const options: cors.CorsOptions = {
     allowedHeaders: [
@@ -18,7 +19,7 @@ const options: cors.CorsOptions = {
 
 import routes from './routes'
 
-mongoose.connect(process.env.DATABASE_URI || `mongodb+srv://root:${process.env.DATABASE_PASSWORD}@databse-joao.voiwao9.mongodb.net/?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST1}=${process.env.DATABASE_HOST2}=${process.env.DATABASE_HOST3}`)
 
 const app = express();
 app.use(express.json());
@@ -27,7 +28,7 @@ app.use(cors(options));
 app.options('*', cors(options));
 
 
-const port = process.env.PORT || 3003;
+const port = process.env.PORT;
 
 app.use(routes);
 app.listen(port, () => {console.log(`Funcionando na porta ${port}`)})
