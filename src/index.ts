@@ -13,7 +13,7 @@ const options: cors.CorsOptions = {
     ],
     credentials: true,
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: 'http://localhost:3003',
+    origin: 'http://localhost:3000',
     preflightContinue: false,
   };
 
