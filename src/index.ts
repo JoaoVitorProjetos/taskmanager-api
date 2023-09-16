@@ -12,13 +12,13 @@ const options: cors.CorsOptions = {
     ],
     credentials: true,
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: 'https://crud-typescript-frontend.vercel.app',
+    origin: 'https://taskmanagerjoao.vercel.app',
     preflightContinue: false,
   };
 
 import routes from './routes'
 
-mongoose.connect(process.env.DATABASE_URI || 'mongodb+srv://root:Joaovitor123@databse-joao.voiwao9.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.DATABASE_URI || `mongodb+srv://root:${process.env.DATABASE_PASSWORD}@databse-joao.voiwao9.mongodb.net/?retryWrites=true&w=majority`)
 
 const app = express();
 app.use(express.json());

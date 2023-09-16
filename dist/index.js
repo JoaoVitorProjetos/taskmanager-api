@@ -16,11 +16,11 @@ const options = {
     ],
     credentials: true,
     methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-    origin: 'https://crud-typescript-frontend.vercel.app',
+    origin: 'https://taskmanagerjoao.vercel.app',
     preflightContinue: false,
 };
 const routes_1 = __importDefault(require("./routes"));
-mongoose_1.default.connect(process.env.DATABASE_URI || 'mongodb+srv://root:Joaovitor123@databse-joao.voiwao9.mongodb.net/?retryWrites=true&w=majority');
+mongoose_1.default.connect(process.env.DATABASE_URI || `mongodb+srv://root:${process.env.DATABASE_PASSWORD}@databse-joao.voiwao9.mongodb.net/?retryWrites=true&w=majority`);
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded());
